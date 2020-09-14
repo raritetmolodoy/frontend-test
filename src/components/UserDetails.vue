@@ -9,7 +9,7 @@
               <img :src="selectedUser.avatar" class="avatar-img" alt="avatar" />
             </div>
             <div class="col col-9">
-              <template v-if="!formVisible2">
+              <template v-if="!formVisible">
                 <h3 class="m-0">
                   {{ selectedUser.first_name }}
                   {{ selectedUser.last_name }}
@@ -42,7 +42,7 @@
             <div class="col col-9">
               <button
                 @click="prepareEditForm()"
-                v-if="!formVisible2"
+                v-if="!formVisible"
                 class="btn btn-dark mr-2"
               >
                 Edit
@@ -76,11 +76,18 @@
 export default {
   props: ['id'],
   data: () => ({
-    formVisible2: false,
+    formVisible: false,
     editFirstname: null,
     editLastName: null,
     editEmail: null
   }),
+
+  watch: {
+    id() {
+      this.formVisible = false
+    }
+  },
+
   computed: {
     selectedUser() {
       return this.$store.state.users.find(x => x.id === this.id)
@@ -89,13 +96,14 @@ export default {
       return !this.editFirstname || !this.editLastName || !this.editEmail
     }
   },
+
   methods: {
     deleteUser() {
       this.$store.dispatch('deleteUser', { id: this.selectedUserId })
       this.selectedUserId = null
     },
     prepareEditForm() {
-      this.formVisible2 = true
+      this.formVisible = true
       this.editFirstname = this.selectedUser.first_name
       this.editLastName = this.selectedUser.last_name
       this.editEmail = this.selectedUser.email
@@ -107,7 +115,7 @@ export default {
         lastName: this.editLastName,
         email: this.editEmail
       })
-      this.formVisible2 = false
+      this.formVisible = false
     }
   }
 }

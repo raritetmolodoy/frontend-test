@@ -93,6 +93,7 @@ export default {
     async fetchUsers() {
       this.selectedUserId = null
       await this.$store.dispatch('fetchUsers', { page: this.page })
+      if (!this.$route.query.page) this.$router.push(`?page=${this.page}`)
     }
   }
 }
