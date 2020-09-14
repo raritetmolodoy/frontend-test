@@ -99,8 +99,8 @@ export default {
 
   methods: {
     deleteUser() {
-      this.$store.dispatch('deleteUser', { id: this.selectedUserId })
-      this.selectedUserId = null
+      this.$store.dispatch('deleteUser', { id: this.id })
+      this.$parent.selectedUserId = null
     },
     prepareEditForm() {
       this.formVisible = true
