@@ -4,6 +4,8 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const BASE_API = 'https://reqres.in/api'
+
 export default new Vuex.Store({
   state: {
     users: [],
@@ -38,22 +40,20 @@ export default new Vuex.Store({
 
   actions: {
     async fetchUsers(store, payload) {
-      const users = await axios.get(
-        `https://reqres.in/api/users?page=${payload.page}`
-      )
+      const users = await axios.get(`${BASE_API}/users?page=${payload.page}`)
       store.commit('setUsers', users.data.data)
       store.commit('setTotalPages', users.data.total_pages)
     },
-    async deleteUser({ commit }, payload) {
-      await axios.delete(`https://reqres.in/api/users/${payload.id}`)
 
+    async deleteUser({ commit }, payload) {
+      await axios.delete(`${BASE_API}/users/${payload.id}`)
       //  fetch users again here. mock instead:
       commit('deleteUser', { id: payload.id })
     },
 
     async signIn({ commit }, payload) {
       try {
-        const response = await axios.post(`https://reqres.in/api/login`, {
+        const response = await axios.post(`${BASE_API}/login`, {
           email: payload.email,
           password: payload.password
         })
@@ -77,7 +77,7 @@ export default new Vuex.Store({
     },
 
     async addUser({ commit }, payload) {
-      const user = await axios.post(`https://reqres.in/api/users`, {
+      const user = await axios.post(`${BASE_API}/users`, {
         first_name: payload.firstName,
         last_name: payload.lastName,
         email: payload.email
@@ -91,13 +91,9 @@ export default new Vuex.Store({
         last_name: payload.lastName,
         email: payload.email
       }
-      const edited = await axios.patch(
-        `https://reqres.in/api/users/${payload.id}`,
-        data
-      )
+      await axios.patch(`${BASE_API}/api/users/${payload.id}`, data)
       // fetch here to update data. mock:
       commit('setEditedUser', { id: payload.id, ...data })
-      console.log(edited)
     }
   }
 })

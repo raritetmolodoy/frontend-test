@@ -110,7 +110,7 @@ export default {
     },
     async editUser() {
       await this.$store.dispatch('editUser', {
-        id: this.selectedUserId,
+        id: this.id,
         firstName: this.editFirstname,
         lastName: this.editLastName,
         email: this.editEmail
