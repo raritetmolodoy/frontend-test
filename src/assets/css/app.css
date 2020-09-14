@@ -1,4 +1,16 @@
 #app {
   height: 100vh;
   background: #f8f9fa;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+  font-family: 'Source Sans';
+  src: url('../fonts/sourse-sans-pro.ttf');
+}
+
+* {
+  font-family: 'Source Sans', sans-serif;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="card border-0 shadow-sm">
+    <div class="card-header">User details</div>
     <div v-if="id">
-      <div class="card-header">User details</div>
       <div class="card-body">
         <div class="card-title">
           <div class="row align-items-center justify-content-center">

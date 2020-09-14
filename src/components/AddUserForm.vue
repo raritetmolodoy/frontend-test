@@ -1,5 +1,6 @@
 <template>
   <div class="card mt-3 shadow-sm border-0">
+    <div class="card-header">Add user</div>
     <div class="card-body">
       <template v-if="formVisible">
         <div>
@@ -30,7 +31,7 @@
           class="btn btn-success flex-fill mr-2"
           v-if="!formVisible"
         >
-          Add user
+          Show add form
         </button>
         <button
           @click="addUser()"
